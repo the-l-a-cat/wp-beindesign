@@ -1,50 +1,24 @@
 <?php/*
 Template Name: blog-template
 */?> 
+    <?php get_header(); ?> 
+    <script>
 
-		<?php if ( is_home()) {
-			get_header(); ?> 
-			 
-			
-			<?php }; ?>
-		
-		
-		
-		
-		<div  class="content-area blog-wr " >
-					
-		<?php if ( !is_home()) {
-			 global $query_string; 
-			$posts = query_posts($query_string.'&posts_per_page=3');	
-		}; 
-		?>
-			
-		<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
-			
-			<article  class="blog-p" id="<?php the_ID(); ?>" >
-		
-					<?php if ( has_post_thumbnail() ) : ?>
-						<div >
-							<a href="<?php the_permalink(); ?>">
-								<?php the_post_thumbnail(); ?>
-							</a>
-						</div>
-					<?php endif; ?>
-						<h3>
-							<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-						</h3>		
-						<div >
-							<?php the_content(); ?>
-						</div>
-						
-						
+    function Clone(x) {
+           for(p in x)
+               this[p] = (typeof(x[p]) == 'object')? new Clone(x[p]) : x[p];
+    }
 
-			</article>
-					<?php endwhile; ?>
-				<?php endif;
-					
-					wp_reset_query();?>
-			
+    var contents = [] ;
+    var current_screen = ''
+
+    </script>
+    <ul class='blog-menu'></ul>
+    <div  class="content-area blog-wr" >
+    <?php while ( have_posts() ) : the_post(); ?>
+        <?php get_template_part ('post'); ?>
+    <?php endwhile; ?>
+                
 			<?php if ( is_front_page()){
 				$page_id=23;
 				 ?>
@@ -52,6 +26,44 @@ Template Name: blog-template
 		
 			<?php }; ?>
 				
-		</div><!-- content-area -->
+    </div><!-- content-area -->
+<script>
+
+                for (x in contents) {
+                    jQuery ('.blog-menu') .append (
+                        '<li id="blog-menu-' + contents[x]['ID']
+                        + '">' + contents[x]['title']
+                        + '</li>'
+                    );
+
+                    function closure (current_id) {
+                        function tempora () {
+                                jQuery (current_screen) .css ('visibility', 'hidden');
+                                current_screen = '#post-' + current_id;
+                                jQuery (current_screen) .css ('visibility', 'visible');
+                        }
+                        return tempora;
+                    }
+
+                    jQuery ('#blog-menu-' + contents [x] ['ID']) .click (
+                        closure (contents [x] ['ID'])
+                    );
+
+
+                };
+
+                // Initialize first screen.
+                current_screen = '#post-' + contents [0] ['ID'];
+                jQuery (current_screen) .css ('visibility', 'visible');
+
+                jQuery ('.blog-menu li') .hover ( function (o) {
+                    jQuery (o) .css ('background-color', 'red')
+                }
+                , function (o) {
+                    jQuery (o) .css ('opacity', '1.0')
+                }
+                );
+
+</script>
 
 <?php get_footer(); ?>

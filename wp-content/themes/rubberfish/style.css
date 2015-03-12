@@ -55,8 +55,8 @@ li {
 	list-style:none;
 	display:inline;
 	margin-right:10px;
-	}.blog-p , .main-p, .some-p{	border: solid 1px black;	/*background-color: #f0f0f0;*/	padding:3% 5%;	width:70%;	height:60%;	}
-	.blog-p{	margin:1.5%;}
+	}.blog-post , .main-p, .some-p{	border: solid 1px black;	/*background-color: #f0f0f0;*/	padding:3% 5%;	width:70%;	height:60%;	}
+	.blog-post{	margin:1.5%; visibility: hidden; position: fixed}
 	/* end nav*/.content-area{	height:100%;	}
 	/* frontpage content*/
 .current{
