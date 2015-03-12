@@ -1,7 +1,30 @@
 <?php /*
 Template Name: post
  */ ?>
-        <article class="blog-post" id="post-<?php the_ID(); ?>" >
+
+        <article class="blog-post" id="post-<?php echo $post->post_name; ?>" >
+            <?php
+            if (get_page_by_path ('page-'.$post->post_name)):
+                $link_to_post = True;
+            elseif (get_category_by_slug($post->post_name)):
+                $link_to_category = True;
+            endif;
+            ?>
+
+        <?php if ($link_to_post or $link_to_category):
+            {
+                echo '<a class="blog-post-link"';
+                if (get_page_by_path ('page-'.$post->post_name)):
+                    echo ('href="/page-'.$post->post_name.'"');
+                elseif (get_category_by_slug($post->post_name)):
+                    echo ('href="/category/'.$post->post_name.'"');
+                endif;
+                echo '> <div class="inlay"> </div> </a>';
+            };
+            endif;
+        ?>
+
+
 		
             <?php if ( has_post_thumbnail() ) : ?>
                 <div >
@@ -12,7 +35,7 @@ Template Name: post
             <?php endif; ?>
 
                 <h3>
-                    <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                    <span href="<?php the_permalink(); ?>"><?php the_title(); ?></span>
                 </h3>		
                 <div >
                     <?php the_content(); ?>

@@ -4,6 +4,26 @@ Template Name: blog-template
     <?php get_header(); ?> 
     <script>
 
+    function transition_in (x) {
+        jQuery (x) .css ('display', 'block');
+        jQuery (x) .css ('visibility', 'visible');
+        jQuery (x) .fadeTo (500, 1);
+    }
+
+    function transition_out (x) {
+        jQuery (x) .fadeTo (500, 0);
+        jQuery (x) .css ('display', 'none');
+    }
+
+    function transition (target_screen) {
+        if (current_screen != target_screen) {
+            transition_out (current_screen);
+            transition_in (target_screen);
+            current_screen = target_screen;
+        }
+    }
+
+
     function Clone(x) {
            for(p in x)
                this[p] = (typeof(x[p]) == 'object')? new Clone(x[p]) : x[p];
@@ -13,54 +33,81 @@ Template Name: blog-template
     var current_screen = ''
 
     </script>
-    <ul class='blog-menu'></ul>
+    <div>
+        <ul class='blog-menu'>
+<?php if (is_category('frontpage')):
+echo '<li><span>BEinDESIGN</span></li>';
+else:
+    echo '<li><a href="'.get_term_link('frontpage', 'category') .'">BEinDESIGN</a></li>';
+endif; ?>
+        </ul>
+    </div>
     <div  class="content-area blog-wr" >
     <?php while ( have_posts() ) : the_post(); ?>
         <?php get_template_part ('post'); ?>
     <?php endwhile; ?>
-                
-			<?php if ( is_front_page()){
-				$page_id=23;
-				 ?>
-			<div class='read-more-b'><a href="<?php echo get_page_uri($page_id )?>"> Подробнее </a></div>
-		
-			<?php }; ?>
-				
+
     </div><!-- content-area -->
 <script>
 
                 for (x in contents) {
                     jQuery ('.blog-menu') .append (
-                        '<li id="blog-menu-' + contents[x]['ID']
+                        '<li id="blog-menu-' + contents[x]['slug']
                         + '">' + contents[x]['title']
                         + '</li>'
                     );
 
-                    function closure (current_id) {
+                    function closure (target_slug) {
                         function tempora () {
-                                jQuery (current_screen) .css ('visibility', 'hidden');
-                                current_screen = '#post-' + current_id;
-                                jQuery (current_screen) .css ('visibility', 'visible');
+                            var target_screen = '#post-'+target_slug;
+                            transition (target_screen);
                         }
                         return tempora;
                     }
 
-                    jQuery ('#blog-menu-' + contents [x] ['ID']) .click (
-                        closure (contents [x] ['ID'])
+                    jQuery ('#blog-menu-' + contents [x] ['slug']) .click (
+                        closure (contents [x] ['slug'])
                     );
 
 
                 };
 
                 // Initialize first screen.
-                current_screen = '#post-' + contents [0] ['ID'];
-                jQuery (current_screen) .css ('visibility', 'visible');
-
-                jQuery ('.blog-menu li') .hover ( function (o) {
-                    jQuery (o) .css ('background-color', 'red')
+                current_screen = '#post-' + contents [0] ['slug'];
+                jQuery(document) .ready ( function () {
+                    setTimeout (transition_in (current_screen, current_screen), 1000); //???
+                    scroll_listener();
                 }
-                , function (o) {
-                    jQuery (o) .css ('opacity', '1.0')
+                );
+
+                function scroll_listener () {
+                    var delta = 12;
+                    jQuery(window) .bind ('DOMMouseScroll mousewheel', function (event) {
+                        if (Math.abs(event.originalEvent.wheelDelta) < delta || Math.abs (event.originalEvent.detail) < delta) {
+                            return;
+                        }
+                            return;
+
+                        if (event.originalEvent.wheelDelta > 0) {
+                            for (x in contents) {
+                                if ('#post'+contents [x] ['slug'] == current_screen) {
+                                    if (x+1 in contents) {
+                                        transition ('#post-' + contents [x+1] ['slug']);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                )
+                }
+
+
+
+                jQuery ('.blog-menu li') .hover ( function () {
+                    jQuery (this) .css ('border', '2px solid rgba(128, 128, 128, 1.0')
+                }
+                , function () {
+                    jQuery (this) .css ('border', '2px solid rgba(128, 128, 128, 0.0')
                 }
                 );
 
