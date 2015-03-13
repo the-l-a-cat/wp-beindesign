@@ -73,7 +73,8 @@ endif; ?>
                 };
 
                 // Initialize first screen.
-                current_screen = '#post-' + contents [0] ['slug'];
+                if (window.location.hash) { current_screen = window.location.hash ; }
+                else { current_screen = '#post-' + contents [0] ['slug']; }
                 jQuery(document) .ready ( function () {
                     setTimeout (transition_in (current_screen, current_screen), 1000); //???
                     scroll_listener();
