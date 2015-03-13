@@ -1,6 +1,6 @@
-<?php/*
+<?php /*
 Template Name: blog-template
-*/?> 
+*/ ?> 
     <?php get_header(); ?> 
     <script>
 
