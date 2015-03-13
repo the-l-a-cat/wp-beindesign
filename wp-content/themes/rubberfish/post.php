@@ -11,18 +11,14 @@ Template Name: post
             endif;
             ?>
 
-        <?php if ($link_to_post or $link_to_category):
-            {
-                echo '<a class="blog-post-link"';
-                if (get_page_by_path ('page-'.$post->post_name)):
-                    echo ('href="/page-'.$post->post_name.'"');
-                elseif (get_category_by_slug($post->post_name)):
-                    echo ('href="/category/'.$post->post_name.'"');
-                endif;
-                echo '> <div class="inlay"> </div> </a>';
-            };
-            endif;
-        ?>
+        <?php if ($link_to_post or $link_to_category): ?>
+        <a class="blog-post-link" <?php if (get_page_by_path ('page-'.$post->post_name)): ?>
+            href="/page-<?php $post->post_name ?>"
+            <?php elseif (get_category_by_slug($post->post_name)): ?>
+            href="/category/<?php $post->post_name?>"
+            <?php endif; ?>
+            > <div class="inlay"> </div> </a>
+        <?php endif; ?>
 
 
 		
