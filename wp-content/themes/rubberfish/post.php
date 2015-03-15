@@ -12,7 +12,6 @@ if (has_post_thumbnail()):
     $thumbnail = True;
 endif;
 ?>
-<div class="square"></div>
 <article class="blog-post" id="post-<?php echo $post->post_name; ?>" >
 <div class="underlay">
     <a

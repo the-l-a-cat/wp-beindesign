@@ -1,30 +1,22 @@
-<?php 
-		
-		function register_menus(){
-			register_nav_menus(array( 'header-menu' => 'header-menu1', 'footer-menu' => 'footer-menu1'));
-		}
-		if (function_exists('register_nav_menus'))	{
-			 add_action( 'init', 'register_menus' );
-			}
+<?php
 
-		add_theme_support( 'post-thumbnails' ); 
-		
-		function jquery_init() {
-			if (!is_admin()) {
-				wp_enqueue_script('jquery');
-			}
-		}
-		add_action('wp_enqueue_scripts', 'jquery_init');
-		
-		
-		
-		
-		if ( !is_admin() ) {
-		function register_my_js() {
-			wp_enqueue_script( 'the_wheel', get_bloginfo( 'template_directory' ).'/the_wheel.js', array( 'jquery' ), '1.0', true );
-			}
-			add_action('init', 'register_my_js');
-		}
-	
-		
+add_filter( 'display_posts_shortcode_output', 'be_display_posts_portfolio', 10, 7 );
+function be_display_posts_portfolio( $output, $atts, $image, $title, $date, $excerpt, $inner_wrapper ) {
+
+    $output = '<' . $inner_wrapper . ' class="listing-item">
+        <div class="index-post">
+        <div class="underlay">
+            <div class="lining">
+                ' . $image .'
+            </div>
+        </div>
+        <div class="content">
+            ' . $title . $date . $excerpt . '
+        </div>
+        </div>
+    </' . $inner_wrapper . '>';
+    // Finally we'll return the modified output
+    return $output;
+} 
+
 ?>

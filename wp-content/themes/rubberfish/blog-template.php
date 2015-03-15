@@ -5,14 +5,14 @@ Template Name: blog-template
     <script>
 
     function transition_in (x) {
-        jQuery (x) .css ('display', 'block');
-        jQuery (x) .css ('visibility', 'visible');
-        jQuery (x) .fadeTo (500, 1);
+        $ (x) .css ('display', 'block');
+        $ (x) .css ('visibility', 'visible');
+        $ (x) .fadeTo (500, 1);
     }
 
     function transition_out (x) {
-        jQuery (x) .fadeTo (500, 0);
-        jQuery (x) .css ('display', 'none');
+        $ (x) .fadeTo (500, 0);
+        $ (x) .css ('display', 'none');
     }
 
     function transition (target_screen) {
@@ -30,7 +30,7 @@ Template Name: blog-template
     }
 
     var contents = [] ;
-    var current_screen = ''
+    var current_screen = '' ;
 
     </script>
     <div>
@@ -51,7 +51,7 @@ endif; ?>
 <script>
 
                 for (x in contents) {
-                    jQuery ('.blog-menu') .append (
+                    $ ('.blog-menu') .append (
                         '<li id="blog-menu-' + contents[x]['slug']
                         + '">' + contents[x]['title']
                         + '</li>'
@@ -65,7 +65,7 @@ endif; ?>
                         return tempora;
                     }
 
-                    jQuery ('#blog-menu-' + contents [x] ['slug']) .click (
+                    $ ('#blog-menu-' + contents [x] ['slug']) .click (
                         closure (contents [x] ['slug'])
                     );
 
@@ -75,7 +75,7 @@ endif; ?>
                 // Initialize first screen.
                 if (window.location.hash) { current_screen = window.location.hash ; }
                 else { current_screen = '#post-' + contents [0] ['slug']; }
-                jQuery(document) .ready ( function () {
+                $(document) .ready ( function () {
                     setTimeout (transition_in (current_screen, current_screen), 1000); //???
                     scroll_listener();
                 }
@@ -83,7 +83,7 @@ endif; ?>
 
                 function scroll_listener () {
                     var delta = 12;
-                    jQuery(window) .bind ('DOMMouseScroll mousewheel', function (event) {
+                    $(window) .bind ('DOMMouseScroll mousewheel', function (event) {
                         if (Math.abs(event.originalEvent.wheelDelta) < delta || Math.abs (event.originalEvent.detail) < delta) {
                             return;
                         }
@@ -104,11 +104,13 @@ endif; ?>
 
 
 
-                jQuery ('.blog-menu li') .hover ( function () {
-                    jQuery (this) .css ('border', '2px solid rgba(128, 128, 128, 1.0')
+                $ ('.blog-menu li') .hover ( function () {
+                    $ (this) .css ('border', '2px solid rgba(128, 128, 128, 1.0')
+                    $ (this) .css ('z-index', '1000')
                 }
                 , function () {
-                    jQuery (this) .css ('border', '2px solid rgba(128, 128, 128, 0.0')
+                    $ (this) .css ('border', '2px solid rgba(128, 128, 128, 0.0')
+                    $ (this) .css ('z-index', '0')
                 }
                 );
 

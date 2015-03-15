@@ -62,7 +62,7 @@ a:hover {
 	list-style: none;
 	display: inline-block;
 	margin: 0px;
-    margin-right: -1px;
+    margin-right: 0px;
     border: solid 2px rgba(128, 128, 128, 0.0);
     padding: 10px 10px 5px;
 	background-color : rgba(255, 255, 255, 1);
@@ -70,7 +70,7 @@ a:hover {
 
 .blog-post {
     position : static;
-    width: 600px;
+    width: 700px;
     height: 400px;
 
     margin: 10px 50px;
@@ -85,6 +85,11 @@ a:hover {
     display: none;
 }
 
+.index-post {
+    width: 300px;
+    height: 200px;
+}
+
 .underlay {
     width: 0px;
     height: 0px;
@@ -95,7 +100,7 @@ a:hover {
 .underlay .lining {
     position: relative;
     overflow: hidden;
-    width: 600px;
+    width: 700px;
     height: 400px;
 }
 
@@ -107,12 +112,25 @@ a:hover {
 
 .content {
     position: relative;
-    width: 600;
+    width: 700;
     height: 400;
 
     margin: 0px;
     padding: 20px;
 
     pointer-events: none;
+}
+
+.display-posts-listing {
+    vertical-align: top;
+}
+
+.listing-item {
+    display: inline-block;
+    border: 1px solid black;
+}
+
+.listing-item a.title {
+    color: blue;
 }
 
