@@ -11,126 +11,98 @@ Rubberfish
 .
 */
 
-/* -----------------------------------------
-	Table of Contents
---------------------------------------------
-.. 01. General
-.. 02. Main Navigation
-.. 03. Header
-.. 04. Modules
-.. 05. Footer
-.. 06. Comments
-.. 07. Widgets Styling
-.. 08. WordPress defaults
-.. 09. Mobile Menu
-.. 10. External Plugins
-.. 11. WooCommerce
-.. 12. Global Mediaqueries
-*/
+
+/* Positioning */
 
 html {
-	padding:0px;
-	margin-top:0px;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    overflow: hidden;
 }
 
 body {
-    height           : 100%;
-    width            : 100%;
-	margin           : 0px;
-	padding          : 0px;
-	background-color : rgba(240, 240, 240, 1);
-	color            : black;
-	font-family      : 'Calibri', sans-serif;
-	font-size        : 13pt;
-	overflow         : hidden;
-}
-
-a {
-    color:black;
-    text-decoration:none;
-}
-
-a:hover {
-    color:black;
-}
-
-.blog-menu {
     margin: 0;
+    border: 0;
+    padding: 0;
+    overflow: hidden;
 }
 
-.blog-menu li {
-	list-style: none;
-	display: inline-block;
-	margin: 0px;
-    margin-right: 0px;
-    border: solid 2px rgba(128, 128, 128, 0.0);
-    padding: 10px 10px 5px;
-	background-color : rgba(255, 255, 255, 1);
+.inline-block {
+    display: inline-block;
+    margin: 0 10px;
 }
 
-.blog-post {
-    position : static;
-    width: 700px;
-    height: 400px;
-
-    margin: 10px 50px;
-    border: solid 1px rgba(128, 128, 128, 1.0);
-
-    color: white;
-    text-shadow: black 0.1em 0.1em 0.2em;
-
-	background-color : rgba(255, 255, 255, 1);
-    opacity  : 0;
-
-    display: none;
-}
-
-.index-post {
-    width: 300px;
-    height: 200px;
+.fullscreen {
+    position: relative;
 }
 
 .underlay {
-    width: 0px;
-    height: 0px;
-    overflow: visible;
-    position: relative;
+    background: #fff;
 }
 
-.underlay .lining {
-    position: relative;
-    overflow: hidden;
-    width: 700px;
-    height: 400px;
-}
-
-.underlay .lining .background-image {
-    position: relative;
+.fill {
+    position: absolute;
     width: 100%;
     height: 100%;
+    margin: 0;
+    top: 0;
 }
 
 .content {
-    position: relative;
-    width: 700;
-    height: 400;
-
-    margin: 0px;
-    padding: 20px;
-
-    pointer-events: none;
+    position: absolute;
 }
 
-.display-posts-listing {
-    vertical-align: top;
+.slide {
+    display: none;
+    opacity: 0;
 }
 
-.listing-item {
-    display: inline-block;
-    border: 1px solid black;
+.background-image {
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
-.listing-item a.title {
-    color: blue;
+
+/* Styling */
+
+body {
+    font-family: Arial,Helvetica,sans-serif;
+    color: #303030;
 }
 
+.paper {
+    border: 1px solid #000;
+    background: #ffffff;
+    -webkit-box-shadow: 2px 2px 5px 2px rgba(0,0,0,0.2);
+    -moz-box-shadow: 2px 2px 5px 2px rgba(0,0,0,0.2);
+    box-shadow: 1px 1px 2px 2px rgba(0,0,0,0.2);
+    overflow: scroll;
+}
+
+.margins {
+    margin: 0 20px 30px;
+}
+
+.margins:first-child {
+    margin-top: 30px;
+}
+
+.nav {
+    margin-bottom: 1ex;
+}
+
+.nav-elem {
+}
+
+.nav-elem:hover {
+    color: #000000;
+}
+
+.content {
+    margin: 2ex 3em;
+}
+
+.text-block {
+    padding: 2ex 2em;
+}
