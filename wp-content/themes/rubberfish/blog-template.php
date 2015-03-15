@@ -1,27 +1,45 @@
 <?php /*
 Template Name: blog-template
 */ ?> 
-    <?php get_header(); ?> 
+<?php get_header(); ?> 
 <script>
 
 function transition_in (x) {
-    $ (x) .css ('display', 'block');
-    $ (x) .css ('visibility', 'visible');
-    $ (x) .fadeTo (500, 1);
+    console.log ('trans in ' + x);
+    obj = $(x);
+    obj .fadeIn(500)
+        .queue ('in', function (next) { console.log ('trans in queue enter'); next('in') } )
+        .queue ('in', function (next) { obj .css ('display', 'block'); next('in') } )
+        .queue ('in', function (next) { obj .css ('visibility', 'visible'); next('in') } )
+        .queue ('in', function (next) { obj .animate ({'opacity': 1}); next('in') } )
+        .queue ('in', function (next) { console.log ('trans in queue done'); next('in') } )
+
+    $(current_label) .animate ({ 'color': jQuery.Color([0, 0, 0, 0.6]) }, 'fast');
 }
 
 function transition_out (x) {
-    $ (x) .fadeTo (500, 0);
-    $ (x) .css ('display', 'none');
+    console.log ('trans out ' + x);
+    obj = $(x);
+    obj
+        .queue ( function (next) { obj .animate ({'opacity': 1}); next() } )
+        .queue ( function (next) { obj .css ('display', 'none'); next() } )
+        .queue ( function (next) { $(window) .resize(); } )
+
+    $(target_label) .animate ({ 'color': jQuery.Color([0, 0, 0, 0.9]) }, 'fast');
 }
 
-function transition (target_screen) {
+function transition (label) {
+    target_screen = '#post-' + label;
+    target_label = '#blog-menu-' + label;
+    console.log ( 'current screen ' + current_screen );
+    console.log ( 'current label ' + current_label );
+    console.log ( 'label ' + label );
     if (current_screen != target_screen) {
-
-
         transition_out (current_screen);
         transition_in (target_screen);
+
         current_screen = target_screen;
+        current_label = target_label;
         $(window) .resize();
     }
 }
@@ -34,6 +52,8 @@ function Clone(x) {
 
 var contents = [] ;
 var current_screen = '' ;
+var current_label = '' ;
+var label = '';
 
 </script>
 
@@ -63,8 +83,7 @@ for (x in contents) {
 
     function closure (target_slug) {
         function tempora () {
-            var target_screen = '#post-'+target_slug;
-            transition (target_screen);
+            transition (target_slug);
         }
         return tempora;
     }
@@ -78,9 +97,14 @@ for (x in contents) {
 
 // Initialize first screen.
 if (window.location.hash) { current_screen = window.location.hash ; }
-else { current_screen = '#post-' + contents [0] ['slug']; }
+else {
+    label = contents [0] ['slug'];
+    current_screen = '#post-' + contents [0] ['slug'];
+    current_label = '#blog-menu-' + contents [0] ['slug'];
+}
+
 $(document) .ready ( function () {
-    setTimeout (transition_in (current_screen, current_screen), 1000); //???
+    setTimeout (transition (label), 1000); //???
     scroll_listener();
 }
 );
@@ -98,9 +122,7 @@ function scroll_listener () {
             for (x in contents) {
                 if ('#post-' + contents [x] ['slug'] === current_screen) {
                     if (parseInt(x) + Math.sign(scroll_value) in contents) {
-                        console.log ('scrolling to ' + x + ' with scroll ' + (Math.sign(scroll_value)) + '.');
-                        console.log ('target slug ' + ('#post-' + contents [parseInt(x)+Math.sign (scroll_value)] ['slug']) + '.');
-                        transition ('#post-' + contents [parseInt(x)+Math.sign (scroll_value)] ['slug']);
+                        transition (contents [parseInt(x)+Math.sign (scroll_value)] ['slug']);
                     }
                     break;
                 }
@@ -136,6 +158,5 @@ $(window).resize(function() {
 $(document).ready(function() {
     return $(window).resize();
 });
-
 
 </script>
