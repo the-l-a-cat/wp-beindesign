@@ -180,3 +180,11 @@ body {
     text-align: left;
     font-size: 24pt;
 }
+
+.index-card {
+    pointer-events: auto;
+}
+
+.index-card-image {
+    float: left;
+}
