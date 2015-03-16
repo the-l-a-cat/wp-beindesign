@@ -47,6 +47,13 @@ body>div:first-child {
 .fullscreen {
     position: relative;
     min-height: 36ex;
+    min-width: 36ex;
+}
+
+.content-area {
+    margin: 0;
+    padding: 0;
+    width: 100%;
 }
 
 .underlay {
@@ -91,27 +98,50 @@ body {
 }
 
 .margins {
-    margin: 0 20px 30px;
+    margin: 0em;
 }
 
 .nav {
-    margin-bottom: 1ex;
-
-    text-align: center;
+    margin: 0 1em 0 0;
+    padding: 1em;
+    padding-right: 0;
+    float: left;
+    width: auto;
+    max-width: 16em;
+    min-width: 16em;
+    text-align: left;
 }
 
 .nav-elem {
-    margin: 1ex;
+    margin: 0;
+    border-left-style: solid;
+    border-left-width: 0.5ex;
+    border-left-color: rgba(178, 0, 0, 0.0);
+    padding: 0.5em;
+    padding-left: 10px;
+
     font-weight: 900;
     font-family: 'Forum';
+    font-size: 14pt;
     color: rgba(0, 0, 0, 0.6);
-    padding: 0.5ex;
 }
 
-.nav-elem:hover {
+.nav-elem.page-title {
+    padding: 0;
+    padding-left: 5px;
+}
+
+.nav-elem:hover:not(.page-title) {
     color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(0, 0, 0, 0.1);
+    border-left-color: rgba(0, 0, 0, 0.8);
+
     cursor: pointer;
     cursor: hand;
+}
+
+.nav-elem.selected {
+    border-left-color: rgba(178, 0, 0, 0.9);
 }
 
 .nav-elem-logo {
@@ -119,16 +149,25 @@ body {
 }
 
 .content {
-    margin: 2ex 3em;
+    bottom: 0;
+    top: 0;
+    margin: 1em;
     pointer-events: none;
+    overflow: hidden;
 }
+
+.content > :first-child {
+    margin-top: 0;
+}
+
 
 .text-block {
     padding: 2ex 2em;
 }
 
 .page-title {
-    margin: 2ex auto 0;
-    text-align: center;
+    width: 100%;
+    margin: 0;
+    text-align: left;
     font-size: 24pt;
 }

@@ -36,17 +36,17 @@ var current_screen = '' ;
 
 </script>
 
-    <div class='page-title nav-elem'>
-    <a href="<?php get_term_link('frontpage', 'category') ?>">BEinDESIGN
-        </a>
-    </div>
 <div>
 
     <div class='nav blog-menu margins'>
+        <div class='page-title nav-elem'>
+            <a href="<?php echo get_term_link('frontpage', 'category'); ?>">BEinDESIGN
+            </a>
+        </div>
         <?php if (is_category('frontpage')): ?>
-        <div class="nav-elem inline-block nav-elem-logo"><span>BEinDESIGN</span></div>
+        <div class="nav-elem nav-elem-logo"><span>BEinDESIGN</span></div>
         <?php else: ?>
-        <div class="nav-elem inline-block nav-elem-logo" id="nav-elem-logo">
+        <div class="nav-elem nav-elem-logo" id="nav-elem-logo">
         <a href="<?php get_term_link('frontpage', 'category') ?>">BEinDESIGN
             </a>
         </div>
@@ -62,7 +62,7 @@ var current_screen = '' ;
 
 for (x in contents) {
     $ ('.blog-menu') .append (
-        '<div class="nav-elem inline-block" id="blog-menu-' + contents[x]['slug']
+        '<div class="nav-elem" id="blog-menu-' + contents[x]['slug']
         + '">' + contents[x]['title']
         + '</div>'
     );
