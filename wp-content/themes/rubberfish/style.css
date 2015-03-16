@@ -78,7 +78,7 @@ body {
     -webkit-box-shadow: 2px 2px 5px 2px rgba(0,0,0,0.2);
     -moz-box-shadow: 2px 2px 5px 2px rgba(0,0,0,0.2);
     box-shadow: 1px 1px 2px 2px rgba(0,0,0,0.2);
-    overflow: scroll;
+    overflow: hidden;
 }
 
 .margins {
