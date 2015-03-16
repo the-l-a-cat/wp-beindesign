@@ -128,7 +128,7 @@ body {
 .nav-elem.page-title {
 }
 
-.nav-elem:hover:not(.page-title) {
+.nav-elem:hover:not(.page-title):not(.selected) {
     color: rgba(0, 0, 0, 0.9);
     background-color: rgba(0, 0, 0, 0.1);
     border-left-color: rgba(0, 0, 0, 0.8);
@@ -138,6 +138,8 @@ body {
 }
 
 .nav-elem.selected {
+    color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(0, 0, 0, 0.1);
     border-left-color: rgba(178, 0, 0, 0.9);
 }
 

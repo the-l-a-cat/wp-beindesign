@@ -16,18 +16,26 @@ function transition_out (x) {
 }
 
 function transition (slug) {
+    window.history.pushState({}, slug, '/category/frontpage/#post-' + slug);
+    transition_listener (slug);
+
+}
+
+function transition_listener (slug) {
     target_screen = '#post-' + slug;
-    console.log (current_screen + '...' + target_screen);
+    target_nav = '#blog-menu-' + slug;
     if (current_screen != target_screen) {
         console.log ('Transition to ' + slug + '...');
         transition_out (current_screen);
         transition_in (target_screen);
+        $(target_nav) .toggleClass('selected');
+        $(current_nav) .toggleClass('selected');
 
         current_screen = target_screen;
+        current_nav = target_nav;
         $(window) .resize();
     }
 }
-
 
 function Clone(x) {
        for(p in x)
@@ -36,6 +44,7 @@ function Clone(x) {
 
 var contents = [] ;
 var current_screen = '' ;
+var current_nav = '';
 
 </script>
 
