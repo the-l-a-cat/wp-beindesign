@@ -1,4 +1,5 @@
 <?php
+add_theme_support( 'post-thumbnails' );
 
 add_filter( 'display_posts_shortcode_output', 'be_display_posts_portfolio', 10, 7 );
 function be_display_posts_portfolio( $output, $atts, $image, $title, $date, $excerpt, $inner_wrapper ) {
