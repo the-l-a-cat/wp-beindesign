@@ -16,7 +16,14 @@ function transition_out (x) {
 }
 
 function transition (slug) {
-    window.history.pushState({}, slug, '/category/frontpage/#post-' + slug);
+    for (x in contents) {
+        if (contents [x] ['slug'] == slug) {
+            category = contents [x] ['category'];
+            break;
+        }
+    }
+    
+    window.history.pushState({}, slug, '/category/' + category + '/#post-' + slug);
     transition_listener (slug);
 
 }

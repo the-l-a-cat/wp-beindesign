@@ -44,6 +44,7 @@ endif;
         { 'slug'  : '<?php echo $post->post_name; ?>'
         , 'title' : '<?php echo $post->post_title; ?>'
         , 'ID'    : '<?php echo $post->ID; ?>'
+        , 'category'    : '<?php $cat = (get_the_category ($post->ID) [0] ); echo $cat->slug ; ?>'
         }
     )
 </script>
