@@ -15,8 +15,11 @@ function transition_out (x) {
     $ (x) .css ('display', 'none');
 }
 
-function transition (target_screen) {
+function transition (slug) {
+    target_screen = '#post-' + slug;
+    console.log (current_screen + '...' + target_screen);
     if (current_screen != target_screen) {
+        console.log ('Transition to ' + slug + '...');
         transition_out (current_screen);
         transition_in (target_screen);
 
@@ -70,7 +73,7 @@ for (x in contents) {
     function closure (target_slug) {
         function tempora () {
             var target_screen = '#post-'+target_slug;
-            transition (target_screen);
+            transition (target_slug);
         }
         return tempora;
     }
@@ -86,7 +89,10 @@ for (x in contents) {
 if (window.location.hash) { current_screen = window.location.hash ; }
 else { current_screen = '#post-' + contents [0] ['slug']; }
 $(document) .ready ( function () {
-    setTimeout (transition_in (current_screen, current_screen), 1000); //???
+    label = current_screen.substring (current_screen.indexOf('-') + 1);
+    current_screen = ''
+    
+    transition (label)
     scroll_listener();
 }
 );
@@ -106,7 +112,7 @@ function scroll_listener () {
                     if (parseInt(x) + Math.sign(scroll_value) in contents) {
                         console.log ('scrolling to ' + x + ' with scroll ' + (Math.sign(scroll_value)) + '.');
                         console.log ('target slug ' + ('#post-' + contents [parseInt(x)+Math.sign (scroll_value)] ['slug']) + '.');
-                        transition ('#post-' + contents [parseInt(x)+Math.sign (scroll_value)] ['slug']);
+                        transition (contents [parseInt(x)+Math.sign (scroll_value)] ['slug']);
                     }
                     break;
                 }
