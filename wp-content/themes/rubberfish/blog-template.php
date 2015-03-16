@@ -36,14 +36,21 @@ var current_screen = '' ;
 
 </script>
 
+    <div class='page-title nav-elem'>
+    <a href="<?php get_term_link('frontpage', 'category') ?>">BEinDESIGN
+        </a>
+    </div>
 <div>
+
     <div class='nav blog-menu margins'>
-<?php if (is_category('frontpage')):
-echo '<div class="nav-elem inline-block"><span>BEinDESIGN</span></div>';
-else:
-    echo '<div class="nav-elem inline-block"><a href="'.get_term_link('frontpage', 'category') .'">BEinDESIGN</a></div>';
-endif; ?>
+        <?php if (is_category('frontpage')): ?>
+        <div class="nav-elem inline-block nav-elem-logo"><span>BEinDESIGN</span></div>
+        <?php else: ?>
+        <div class="nav-elem inline-block nav-elem-logo" id="nav-elem-logo">
+        <a href="<?php get_term_link('frontpage', 'category') ?>">BEinDESIGN
+            </a>
         </div>
+        <?php endif; ?>
     </div>
     <div  class="content-area blog-wr" >
     <?php while ( have_posts() ) : the_post(); ?>
