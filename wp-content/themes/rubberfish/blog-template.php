@@ -1,7 +1,7 @@
 <?php /*
 Template Name: blog-template
 */ ?> 
-    <?php get_header(); ?> 
+<?php get_header(); ?> 
 <script>
 
 function transition_in (x) {
@@ -17,10 +17,9 @@ function transition_out (x) {
 
 function transition (target_screen) {
     if (current_screen != target_screen) {
-
-
         transition_out (current_screen);
         transition_in (target_screen);
+
         current_screen = target_screen;
         $(window) .resize();
     }
@@ -136,6 +135,5 @@ $(window).resize(function() {
 $(document).ready(function() {
     return $(window).resize();
 });
-
 
 </script>
