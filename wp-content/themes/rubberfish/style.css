@@ -54,6 +54,7 @@ body {
 }
 
 .slide {
+    position: relative;
     display: none;
     opacity: 0;
 }
@@ -84,19 +85,19 @@ body {
     margin: 0 20px 30px;
 }
 
-.margins:first-child {
-    margin-top: 30px;
-}
-
 .nav {
+    margin-top: 4ex;
     margin-bottom: 1ex;
 }
 
 .nav-elem {
+    font-weight: 900;
+    color: rgba(0, 0, 0, 0.6);
+    padding: 0.5ex;
 }
 
 .nav-elem:hover {
-    color: #000000;
+    color: rgba(0, 0, 0, 0.9);
 }
 
 .content {
